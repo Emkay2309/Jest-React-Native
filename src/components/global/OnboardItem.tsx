@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -22,59 +22,62 @@ interface OnboardItemProps {
   buttonTitleSecond?: string;
 }
 
-const OnboardItem: React.FC<OnboardItemProps> = ({
-  imageSource,
-  title,
-  subtitle,
-  onPressFirst,
-  buttonTitleFirst,
-  onPressSecond,
-  buttonTitleSecond,
-}) => {
+class OnboardItem extends Component<OnboardItemProps> {
+  render() {
+    const {
+      imageSource,
+      title,
+      subtitle,
+      onPressFirst,
+      buttonTitleFirst,
+      onPressSecond,
+      buttonTitleSecond,
+    } = this.props;
 
-  return (
-    <ImageBackground source={imageSource} testID="background-image" style={styles.backgroundImage}>
-      <LinearGradient
-        colors={[
-          "rgba(0,0,0,0.0)",
-          "rgba(0,0,0,0.2)",
-          "rgba(0,0,0,0.8)",
-          "rgba(0,0,0,1)",
-        ]}
-        style={styles.overlay}
-      >
-        <View style={styles.container}>
-          <Text style={TextStyle.title}>{title}</Text>
-          <Text style={TextStyle.subtitle}>{subtitle}</Text>
+    return (
+      <ImageBackground source={imageSource} testID="background-image" style={styles.backgroundImage}>
+        <LinearGradient
+          colors={[
+            "rgba(0,0,0,0.0)",
+            "rgba(0,0,0,0.2)",
+            "rgba(0,0,0,0.8)",
+            "rgba(0,0,0,1)",
+          ]}
+          style={styles.overlay}
+        >
+          <View style={styles.container}>
+            <Text style={TextStyle.title}>{title}</Text>
+            <Text style={TextStyle.subtitle}>{subtitle}</Text>
 
-          {buttonTitleSecond ? (
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[styles.multiBtn, { backgroundColor: Colors.primary }]}
-                onPress={onPressFirst}
-              >
+            {buttonTitleSecond ? (
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[styles.multiBtn, { backgroundColor: Colors.primary }]}
+                  onPress={onPressFirst}
+                >
+                  <Text style={TextStyle.buttonText}>{buttonTitleFirst}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.multiBtn, { backgroundColor: Colors.white }]}
+                  onPress={onPressSecond}
+                >
+                  <Text style={TextStyle.buttonTextBlack}>
+                    {buttonTitleSecond}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity style={styles.button} onPress={onPressFirst}>
                 <Text style={TextStyle.buttonText}>{buttonTitleFirst}</Text>
               </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[styles.multiBtn, { backgroundColor: Colors.white }]}
-                onPress={onPressSecond}
-              >
-                <Text style={TextStyle.buttonTextBlack}>
-                  {buttonTitleSecond}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <TouchableOpacity style={styles.button} onPress={onPressFirst}>
-              <Text style={TextStyle.buttonText}>{buttonTitleFirst}</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </LinearGradient>
-    </ImageBackground>
-  );
-};
+            )}
+          </View>
+        </LinearGradient>
+      </ImageBackground>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   backgroundImage: {

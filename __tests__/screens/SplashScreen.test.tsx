@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react-native';
-import SplashScreen from '../../src/screens/SplashScreen';
+import SplashScreen from '../../src/screens/splash/SplashScreen';
 import { prepareNavigation, resetAndNavigate } from '../../src/utils/NavigationUtil';
 
 // Mock the navigation functions

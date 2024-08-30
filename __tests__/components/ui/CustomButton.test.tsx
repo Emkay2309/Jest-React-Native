@@ -1,6 +1,7 @@
 import { render, fireEvent, screen } from '@testing-library/react-native';
 import CustomButton from '../../../src/components/ui/CustomButton';
 import { Colors } from '../../../src/utils/Colors';
+import React from 'react';
 
 jest.mock('../../../src/utils/Scaling', () => ({
     normalizeModerately: jest.fn().mockReturnValue(12),

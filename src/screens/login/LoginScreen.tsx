@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import CustomSafeAreaViewScroll from "../components/global/CustomSafeAreaViewScroll";
-import CustomHeading from "../components/global/CustomHeading";
-import Input from "../components/ui/Input";
-import CustomButton from "../components/ui/CustomButton";
-import FooterTextTouchable from "../components/ui/FooterTextTouchable";
+import CustomSafeAreaViewScroll from "../../components/global/CustomSafeAreaViewScroll";
+import CustomHeading from "../../components/global/CustomHeading";
+import Input from "../../components/ui/Input";
+import CustomButton from "../../components/ui/CustomButton";
+import FooterTextTouchable from "../../components/ui/FooterTextTouchable";
 import { useDispatch } from "react-redux";
 
-import { navigate } from "../utils/NavigationUtil";
-import { AppDispatch } from "../redux/store";
-import { registerUser } from "../redux/reducers/userSlice";
+import { navigate } from "../../utils/NavigationUtil";
+import { AppDispatch } from "../../redux/store";
+import { loginUser } from "../../redux/reducers/userSlice";
 
 interface InputErrors {
-  first_name?: string | null;
-  last_name?: string | null;
   email?: string | null;
   password?: string | null;
   [key: string]: string | null | undefined;
 }
 
-const RegisterScreen: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [inputs, setInputs] = useState({
     email: "",
-    first_name: "",
-    last_name: "",
     password: "",
   });
 
   const [errors, setErrors] = useState<InputErrors>({});
+  const [loading, setLoading] = useState(false);
 
   const handleOnChange = (text: string, input: string) => {
     setInputs((prevState) => ({ ...prevState, [input]: text }));
@@ -41,12 +38,6 @@ const RegisterScreen: React.FC = () => {
   const validateInputs = () => {
     const newErrors: InputErrors = {};
 
-    if (!inputs.first_name.trim()) {
-      newErrors.first_name = "Please enter your first name";
-    } else {
-      newErrors.first_name = null;
-    }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!inputs.email.trim()) {
       newErrors.email = "Please enter your email";
@@ -54,12 +45,6 @@ const RegisterScreen: React.FC = () => {
       newErrors.email = "Please enter a valid email";
     } else {
       newErrors.email = null;
-    }
-
-    if (!inputs.last_name.trim()) {
-      newErrors.last_name = "Enter your last name";
-    } else {
-      newErrors.last_name = null;
     }
 
     if (!inputs.password.trim()) {
@@ -72,33 +57,22 @@ const RegisterScreen: React.FC = () => {
     return Object.keys(newErrors).every((key) => !newErrors[key]);
   };
 
-  const SignUpHandler = async () => {
+  const loginHandler = async () => {
     const isValid = validateInputs();
+
     if (isValid) {
-      dispatch(registerUser(inputs)).then(() => {
+      setLoading(true);
+      dispatch(loginUser(inputs)).then(() => {
         navigate("HomeScreen");
       });
+      setLoading(false);
     }
   };
 
   return (
     <CustomSafeAreaViewScroll>
-      <CustomHeading title="Sign Up" />
+      <CustomHeading title="Login" />
       <View style={styles.inputContainer}>
-        <Input
-          value={inputs.first_name}
-          onChangeText={(text) => handleOnChange(text, "first_name")}
-          onFocus={() => handleError(null, "first_name")}
-          placeholder="First name"
-          error={errors.first_name}
-        />
-        <Input
-          value={inputs.last_name}
-          onChangeText={(text) => handleOnChange(text, "last_name")}
-          onFocus={() => handleError(null, "last_name")}
-          placeholder="Last name"
-          error={errors.last_name}
-        />
         <Input
           value={inputs.email}
           onChangeText={(text) => handleOnChange(text, "email")}
@@ -114,11 +88,16 @@ const RegisterScreen: React.FC = () => {
           error={errors.password}
           secureTextEntry
         />
-        <CustomButton title="Sign Up" testID="Register" onPress={SignUpHandler} />
+        <CustomButton
+          title="Login"
+          testID="Login"
+          loading={loading}
+          onPress={loginHandler}
+        />
       </View>
       <FooterTextTouchable
-        text="Already have an account? Login In"
-        onPress={() => navigate("LoginScreen")}
+        text="Don't have an account? Sign Up"
+        onPress={() => navigate("RegisterScreen")}
       />
     </CustomSafeAreaViewScroll>
   );
@@ -128,4 +107,4 @@ const styles = StyleSheet.create({
   inputContainer: { marginTop: 20 },
 });
 
-export default RegisterScreen;
+export default LoginScreen;

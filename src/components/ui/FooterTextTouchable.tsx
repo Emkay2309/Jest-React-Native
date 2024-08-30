@@ -10,7 +10,6 @@ interface FooterTextTouchableProps {
 
 const FooterTextTouchable: React.FC<FooterTextTouchableProps> = ({ onPress, text, style }) => {
 
-
   return (
     <View testID="footer-view" style={[styles.footer, style]}>
       <TouchableOpacity testID="footer-button" onPress={onPress}>

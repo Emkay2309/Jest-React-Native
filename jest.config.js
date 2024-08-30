@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|react-native-swiper|react-redux|react-native-linear-gradient|@react-navigation|@react-native|@react-native/assets)/)',
+    'node_modules/(?!(react-native|react-native-swiper|react-redux|react-native-toast-message|react-native-linear-gradient|@react-navigation|@react-native|@react-native/assets)/)',
   ],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   testPathIgnorePatterns: ['/node_modules/', '/android/', '/ios/'],

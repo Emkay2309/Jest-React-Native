@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import OnBoardingScreen from '../../src/screens/OnBoardingScreen';
+import OnBoardingScreen from '../../src/screens/onboard/OnBoardingScreen';
 import { navigate } from '../../src/utils/NavigationUtil';
+
 
 
 // Mock the navigate function

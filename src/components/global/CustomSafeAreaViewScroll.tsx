@@ -19,7 +19,7 @@ const CustomSafeAreaScrollView: React.FC<CustomSafeAreaScrollViewProps> = ({ chi
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#1a1a1a'
+    backgroundColor: '#1a1a1a'
   },
   content: {
     flex: 1,

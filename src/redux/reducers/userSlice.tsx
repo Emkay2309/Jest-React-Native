@@ -31,7 +31,6 @@ export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (credentials: Record<string, any>, { rejectWithValue }) => {
     try {
-    
       if (!credentials.email || !credentials.password) throw new Error('Login failed');
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return credentials;

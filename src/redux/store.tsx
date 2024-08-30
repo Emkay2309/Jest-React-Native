@@ -12,6 +12,7 @@ import {
 import reduxStorage from './storage';
 import rootReducer from './rootReducer';
 
+
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,

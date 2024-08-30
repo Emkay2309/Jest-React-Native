@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import { persistor, store } from '../../src/redux/store'; // Import the configured store
-import RegisterScreen from '../../src/screens/RegisterScreen';
+import RegisterScreen from '../../src/screens/register/RegisterScreen';
 import { navigate } from '../../src/utils/NavigationUtil';
 
 

@@ -3,26 +3,29 @@ import { render, fireEvent } from '@testing-library/react-native';
 import CustomHeading from '../../../src/components/global/CustomHeading';
 import { goBack } from '../../../src/utils/NavigationUtil';
 
-
 // Mock the goBack function
 jest.mock('../../../src/utils/NavigationUtil', () => ({
     goBack: jest.fn(),
 }));
 
-describe('CustomHeading', () => {
-    it('should render the title correctly', () => {
-        const title = 'Test Title';
-        const { getByText } = render(<CustomHeading title={title} />);
+describe('CustomHeading test' , ()=> {
 
-        expect(getByText(title)).toBeTruthy();
-    });
+    it('Heading should render correctly ' , ()=> {
 
-    it('should call goBack when the back button is pressed', () => {
-        const { getByTestId } = render(<CustomHeading title="Test Title" />);
-        const backButton = getByTestId('back-button');
+        const {getByText} = render(<CustomHeading title={'Title'} />);
+        expect(getByText('Title')).toBeTruthy();
+    })
 
-        fireEvent.press(backButton);
+    it('should call goBack when btn is pressed ' , ()=> {
+        const {getByTestId} = render(<CustomHeading title='Test' />);
+        const backBtn = getByTestId('back-button');
 
+        fireEvent.press(backBtn);
         expect(goBack).toHaveBeenCalled();
-    });
-});
+    })
+
+})
+
+
+
+
